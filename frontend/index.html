@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibition Floorplan - Interactive Mapping</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📍 Exhibition Floorplan Interactive Map</h1>
+                <p>Explore booths, search exhibitors, and navigate with ease</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- File Upload Section -->
+                <section class="upload-section">
+                    <h2>Upload Floorplan</h2>
+                    <div class="upload-box" id="uploadBox">
+                        <input type="file" id="fileInput" accept=".dwg,.dxf" style="display: none;">
+                        <p>📁 Click to upload DWG or DXF file</p>
+                        <small>or drag and drop</small>
+                    </div>
+                    <div id="uploadStatus" class="upload-status" style="display: none;">
+                        <div class="spinner"></div>
+                        <p id="statusText">Processing file...</p>
+                    </div>
+                </section>
+
+                <!-- Search Section -->
+                <section class="search-section" id="searchSection" style="display: none;">
+                    <h2>Search & Filter</h2>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search booth ID (e.g., A-1)"
+                    >
+                    <button id="searchBtn" class="btn btn-primary">Search</button>
+                    <button id="clearSearchBtn" class="btn btn-secondary">Clear</button>
+                </section>
+
+                <!-- Booth Info Section -->
+                <section class="info-section" id="boothInfo" style="display: none;">
+                    <h2>Booth Details</h2>
+                    <div class="booth-details">
+                        <div class="detail-item">
+                            <label>Booth ID:</label>
+                            <span id="boothId">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Area (sq ft):</label>
+                            <span id="boothArea">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Capacity:</label>
+                            <span id="boothCapacity">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Occupancy:</label>
+                            <div class="capacity-bar">
+                                <div id="capacityFill" class="capacity-fill" style="width: 0%"></div>
+                            </div>
+                            <span id="boothOccupancy">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Nearby Booths:</label>
+                            <ul id="nearbyList" class="nearby-list"></ul>
+                        </div>
+                        <button id="routeBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Get Directions</button>
+                    </div>
+                </section>
+
+                <!-- Route Section -->
+                <section class="route-section" id="routeSection" style="display: none;">
+                    <h2>Route</h2>
+                    <div id="routeInfo" class="route-info">
+                        <p id="routeDistance">Distance: -</p>
+                        <ol id="directionsList" class="directions-list"></ol>
+                    </div>
+                    <button id="clearRouteBtn" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">Clear Route</button>
+                </section>
+
+                <!-- Statistics Section -->
+                <section class="stats-section" id="statsSection" style="display: none;">
+                    <h2>Floorplan Stats</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Total Booths</div>
+                            <div class="stat-value" id="totalBooths">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Total Capacity</div>
+                            <div class="stat-value" id="totalCapacity">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Current Occupancy</div>
+                            <div class="stat-value" id="currentOccupancy">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Occupancy Rate</div>
+                            <div class="stat-value" id="occupancyRate">0%</div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- Map -->
+            <div id="map" class="map"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Exhibition Floorplan Interactive Mapping Application v1.0 | Powered by Leaflet.js</p>
+        </footer>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="js/map.js"></script>
+    <script src="js/booth-info.js"></script>
+    <script src="js/routing.js"></script>
+    <script src="js/spatial.js"></script>
+</body>
+</html>

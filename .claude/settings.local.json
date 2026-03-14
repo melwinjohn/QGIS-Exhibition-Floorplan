@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(.gitignore:*)",
+      "Bash(README.md:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
